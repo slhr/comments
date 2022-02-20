@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Box, Card, CardHeader, Divider, Typography} from "@mui/material";
 import CommentItem from "./CommentItem";
 import defaultAvatar from "../../assets/images/defaultAvatar.png";
+import CommentInputForm from "./CommentInputForm";
 
 
 const initialState = [
@@ -10,7 +11,7 @@ const initialState = [
         text: "9$9$",
         userName: "James Doe",
         userAvatar: defaultAvatar,
-        creationDate: new Date(),
+        creationDate: new Date("2022-02-20T10:00").getTime(),
         rating: 0,
         answers: [
             {
@@ -18,7 +19,7 @@ const initialState = [
                 text: "с вас NaN",
                 userName: "Jane Doe",
                 userAvatar: defaultAvatar,
-                creationDate: new Date(),
+                creationDate: new Date("2022-02-20T14:00").getTime(),
                 rating: 0,
                 answers: [],
             }
@@ -29,7 +30,7 @@ const initialState = [
         text: "конкатенация)",
         userName: "Judy Doe",
         userAvatar: defaultAvatar,
-        creationDate: new Date(),
+        creationDate: new Date("2022-02-20T12:00").getTime(),
         rating: 1,
         answers: []
     },
@@ -38,6 +39,19 @@ const initialState = [
 
 const Comments = () => {
     const [comments, setComments] = useState(initialState);
+
+    const addRootComment = (comment) => {
+        setComments(prevState => [
+            ...prevState, {
+                ...comment,
+                id: new Date().getTime(),
+                userAvatar: defaultAvatar,
+                creationDate: new Date().getTime(),
+                rating: 0,
+                answers: []
+            }
+        ]);
+    };
 
     return (
         <Card variant="outlined" sx={{mt: 2, backgroundColor: "#fff"}}>
@@ -54,7 +68,7 @@ const Comments = () => {
 
             <Divider/>
 
-            form
+            <CommentInputForm addRootComment={addRootComment}/>
 
         </Card>
     );
