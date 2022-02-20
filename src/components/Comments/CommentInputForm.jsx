@@ -1,12 +1,10 @@
 import React from "react";
 import {useForm} from "react-hook-form";
-import {Box, Button, Grid, InputAdornment, TextField} from "@mui/material";
-
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-
 import {yupResolver} from "@hookform/resolvers/yup";
+import {Button, Card, Grid, InputAdornment, TextField} from "@mui/material";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import * as yup from "yup";
 
 
@@ -17,22 +15,29 @@ const schema = yup.object().shape({
 });
 
 
-const CommentInputForm = () => {
-
-    const {register, handleSubmit, formState: {errors}} = useForm({
+const CommentInputForm = ({addComment, addRootComment, setIsInputFormVisible, isOutlined}) => {
+    const {register, handleSubmit, reset, formState: {errors}} = useForm({
         mode: "onSubmit",
         resolver: yupResolver(schema)
     });
 
     const onSubmit = (values) => {
-        console.log(values);
+        if (addRootComment) {
+            addRootComment(values);
+        } else {
+            addComment(values);
+            setIsInputFormVisible(false);
+        }
+        reset();
     };
 
-    return (
-        <Box sx={{p: 3}}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+    const commonTextFieldErrorProps = {error: true, label: "Ошибка", placeholder: ""};
 
+    return (
+        <Card sx={{p: 3}} variant={isOutlined ? "outlined" : null}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <Grid container spacing={2}>
+
                     <Grid item xs={6}>
                         <TextField {...register("userName")} fullWidth size="small" placeholder="Имя"
                                    InputProps={{
@@ -42,15 +47,9 @@ const CommentInputForm = () => {
                                            </InputAdornment>
                                        ),
                                    }}
-
                                    {
                                        ...errors.userName
-                                           ? {
-                                               error: true,
-                                               label: "Ошибка",
-                                               helperText: errors.userName.message,
-                                               placeholder: ""
-                                           }
+                                           ? {...commonTextFieldErrorProps, helperText: errors.userName.message}
                                            : null
                                    }
                         />
@@ -65,15 +64,9 @@ const CommentInputForm = () => {
                                            </InputAdornment>
                                        ),
                                    }}
-
                                    {
                                        ...errors.email
-                                           ? {
-                                               error: true,
-                                               label: "Ошибка",
-                                               helperText: errors.email.message,
-                                               placeholder: ""
-                                           }
+                                           ? {...commonTextFieldErrorProps, helperText: errors.email.message}
                                            : null
                                    }
                         />
@@ -88,36 +81,23 @@ const CommentInputForm = () => {
                                            </InputAdornment>
                                        ),
                                    }}
-
                                    {
                                        ...errors.text
-                                           ? {
-                                               error: true,
-                                               label: "Ошибка",
-                                               helperText: errors.text.message,
-                                               placeholder: ""
-                                           }
+                                           ? {...commonTextFieldErrorProps, helperText: errors.text.message}
                                            : null
                                    }
                         />
                     </Grid>
 
                     <Grid item xs={2}>
-                        <Button type="submit"
-                                variant="contained"
-                                color="success"
-                                size="small"
-                        >
+                        <Button type="submit" variant="contained" color="success" size="small">
                             Отправить
                         </Button>
-
                     </Grid>
 
                 </Grid>
-
             </form>
-
-        </Box>
+        </Card>
     );
 };
 
