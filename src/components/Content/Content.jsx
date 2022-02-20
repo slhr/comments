@@ -2,6 +2,7 @@ import React from "react";
 import {Avatar, Card, CardContent, CardHeader, CardMedia, Divider, Typography} from "@mui/material";
 import defaultAvatar from "../../assets/images/defaultAvatar.png";
 import contentImage from "../../assets/images/content.jpg";
+import {getTimeDelta} from "../../utils/helpers";
 
 
 const Content = () => {
@@ -12,7 +13,7 @@ const Content = () => {
                 <Avatar alt="User Avatar" src={defaultAvatar}/>
             }
                         title="John Doe"
-                        subheader={"1 day ago"}/>
+                        subheader={getTimeDelta(new Date("2022-02-20T00:00").getTime())} />
 
             <Divider/>
 
