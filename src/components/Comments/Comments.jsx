@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Box, Card, CardHeader, Divider, Typography} from "@mui/material";
-import CommentItem from "./CommentItem";
+import CommentItem from "./CommentItem/CommentItem";
 import defaultAvatar from "../../assets/images/defaultAvatar.png";
 import CommentInputForm from "./CommentInputForm";
 
@@ -54,11 +54,11 @@ const Comments = () => {
     };
 
     return (
-        <Card variant="outlined" sx={{mt: 2, backgroundColor: "#fff"}}>
+        <Card variant="outlined" sx={{mt: 2}}>
 
-            <CardHeader title={<Typography variant="h5">Комментарии:</Typography>}/>
+            <CardHeader title={<Typography variant="h6">Комментарии:</Typography>}/>
 
-            <Box sx={{p: 2}}>
+            <Box sx={{p: 3}}>
                 {
                     comments.map(comment =>
                         <CommentItem key={comment.id} {...comment} />
