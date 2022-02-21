@@ -1,11 +1,17 @@
 import React from "react";
 import {useForm} from "react-hook-form";
-import {yupResolver} from "@hookform/resolvers/yup";
 import {Button, Card, Grid, InputAdornment, TextField} from "@mui/material";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import styled from "styled-components";
+import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+
+const Form = styled.form`
+  padding: 25px;
+`;
 
 
 const schema = yup.object().shape({
@@ -34,8 +40,8 @@ const CommentInputForm = ({addComment, addRootComment, setIsInputFormVisible, is
     const commonTextFieldErrorProps = {error: true, label: "Ошибка", placeholder: ""};
 
     return (
-        <Card sx={{p: 3}} variant={isOutlined ? "outlined" : null}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <Card variant={isOutlined ? "outlined" : null}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
                 <Grid container spacing={2}>
 
                     <Grid item xs={6}>
@@ -96,9 +102,10 @@ const CommentInputForm = ({addComment, addRootComment, setIsInputFormVisible, is
                     </Grid>
 
                 </Grid>
-            </form>
+            </Form>
         </Card>
     );
 };
+
 
 export default CommentInputForm;

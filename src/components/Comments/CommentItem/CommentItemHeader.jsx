@@ -1,9 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {Avatar, Box, Typography} from "@mui/material";
 import {getTimeDelta} from "../../../utils/helpers";
 import styled from "styled-components";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+
+
+const FlexWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+`;
 
 
 const CommentRatingControl = styled.div`
@@ -11,6 +17,34 @@ const CommentRatingControl = styled.div`
     color: #548d27;
     cursor: pointer;
   }
+`;
+
+
+const CommentRating = styled.span`
+  color: #757575;
+  font-size: 16px;
+  text-align: center;
+  width: 30px;
+`;
+
+
+const UserAvatar = styled.img`
+  margin-left: 10px;
+  height: 20px;
+  width: 20px;
+`;
+
+
+const UserName = styled.span`
+  color: #4d4d4d;
+  font-weight: bold;
+  margin-left: 10px;
+`;
+
+
+const CreationTime = styled.span`
+  color: #757575;
+  margin-left: 10px;
 `;
 
 
@@ -32,32 +66,29 @@ const CommentItemHeader = ({rating, userAvatar, userName, creationDate, setIsCom
     }, [currentRating, setIsCommentVisible]);
 
     return (
-        <Box sx={{display: "flex", alignItems: "center", mb: 1}}>
+        <FlexWrapper>
 
             <CommentRatingControl>
                 <ArrowDropUpIcon onClick={plusRating}/>
             </CommentRatingControl>
 
-            <Typography sx={{width: 30, textAlign: "center", color: "#757575"}}>
+            <CommentRating>
                 {currentRating > 0 ? "+" + currentRating : currentRating}
-            </Typography>
+            </CommentRating>
 
             <CommentRatingControl>
                 <ArrowDropDownIcon onClick={minusRating}/>
             </CommentRatingControl>
 
-            <Avatar alt="User Avatar" src={userAvatar} sx={{ml: 1, width: 20, height: 20}}/>
+            <UserAvatar alt="UserAvatar" src={userAvatar}/>
 
-            <Box sx={{ml: 1, color: "#4d4d4d", fontWeight: "bold"}}>
-                {userName}
-            </Box>
+            <UserName>{userName}</UserName>
 
-            <Box sx={{ml: 1, color: "#757575"}}>
-                {getTimeDelta(creationDate)}
-            </Box>
+            <CreationTime>{getTimeDelta(creationDate)}</CreationTime>
 
-        </Box>
+        </FlexWrapper>
     );
 };
+
 
 export default CommentItemHeader;

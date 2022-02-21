@@ -1,8 +1,19 @@
 import React, {useState} from "react";
-import {Box, Card, CardHeader, Divider, Typography} from "@mui/material";
+import {Card, CardHeader, Divider, Typography} from "@mui/material";
 import CommentItem from "./CommentItem/CommentItem";
-import defaultAvatar from "../../assets/images/defaultAvatar.png";
 import CommentInputForm from "./CommentInputForm";
+import styled from "styled-components";
+import defaultAvatar from "../../assets/images/defaultAvatar.png";
+
+
+const CommentsWrapper = styled.div`
+  margin-top: 20px;
+`;
+
+
+const CommentItemsWrapper = styled.div`
+  padding: 20px;
+`;
 
 
 const initialState = [
@@ -54,23 +65,25 @@ const Comments = () => {
     };
 
     return (
-        <Card variant="outlined" sx={{mt: 2}}>
+        <CommentsWrapper>
+            <Card variant="outlined">
 
-            <CardHeader title={<Typography variant="h6">Комментарии:</Typography>}/>
+                <CardHeader title={<Typography variant="h6">Комментарии:</Typography>}/>
 
-            <Box sx={{p: 3}}>
-                {
-                    comments.map(comment =>
-                        <CommentItem key={comment.id} {...comment} />
-                    )
-                }
-            </Box>
+                <CommentItemsWrapper>
+                    {
+                        comments.map(comment =>
+                            <CommentItem key={comment.id} {...comment} />
+                        )
+                    }
+                </CommentItemsWrapper>
 
-            <Divider/>
+                <Divider/>
 
-            <CommentInputForm addRootComment={addRootComment}/>
+                <CommentInputForm addRootComment={addRootComment}/>
 
-        </Card>
+            </Card>
+        </CommentsWrapper>
     );
 };
 

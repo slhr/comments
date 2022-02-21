@@ -1,12 +1,11 @@
 import React, {useState} from "react";
-import {Box, Typography} from "@mui/material";
 import CommentInputForm from "../CommentInputForm";
 import CommentItemHeader from "./CommentItemHeader";
 import styled from "styled-components";
 import defaultAvatar from "../../../assets/images/defaultAvatar.png";
 
 
-const VisibilitySwitcher = styled(Box)`
+const VisibilitySwitcher = styled.div`
   display: ${props => props.visible ? "block" : "none"};
 `;
 
@@ -31,10 +30,16 @@ const InputFormVisibilitySwitcher = styled.p`
 `;
 
 
-const CommentWrapper = styled(Box)`
+const CommentWrapper = styled.div`
   border-left: 1px solid #dddddd;
   overflow: hidden;
   padding: 5px 0 5px 25px;
+`;
+
+
+const CommentText = styled.p`
+  font-size: 16px;
+  word-wrap: break-word;
 `;
 
 
@@ -79,7 +84,7 @@ const CommentItem = React.memo(({text, userName, userAvatar, rating, creationDat
 
                 <CommentItemHeader {...{userName, userAvatar, rating, creationDate, setIsCommentVisible}}/>
 
-                <Typography sx={{wordWrap: "break-word"}}>{text}</Typography>
+                <CommentText>{text}</CommentText>
 
                 <InputFormVisibilitySwitcher onClick={toggleInputFormVisibility}>
                     {isInputFormVisible ? "отмена" : "ответить"}
@@ -111,5 +116,6 @@ const CommentItem = React.memo(({text, userName, userAvatar, rating, creationDat
         </CommentWrapper>
     );
 });
+
 
 export default CommentItem;

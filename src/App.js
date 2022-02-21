@@ -1,4 +1,4 @@
-import {createGlobalStyle} from "styled-components";
+import styled, {createGlobalStyle} from "styled-components";
 import {Container} from "@mui/material";
 import Content from "./components/Content/Content";
 import Comments from "./components/Comments/Comments";
@@ -23,15 +23,19 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 
+const AppContainer = styled(Container)`
+  padding: 10px 0;
+`;
+
+
 const App = () => {
     return (
-        <Container maxWidth="md" sx={{p: 3}}>
+        <AppContainer maxWidth="md">
             <Content/>
             <Comments/>
             <GlobalStyles/>
-        </Container>
+        </AppContainer>
     );
 };
-
 
 export default App;
