@@ -25,7 +25,7 @@ const getDeclination = (num, forms) => {
     const h = num % 100;
 
     if (d === 1 && h !== 11) return forms[0];
-    else if (1 < d && d < 5 && !(11 < h && d < 15)) return forms[1];
+    else if (1 < d && d < 5 && !(11 < h && h < 15)) return forms[1];
     return forms[2];
 };
 
