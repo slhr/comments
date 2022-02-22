@@ -80,7 +80,7 @@ const Comments = () => {
 
                 <Divider/>
 
-                <CommentInputForm addRootComment={addRootComment}/>
+                <CommentInputForm addComment={addRootComment}/>
 
             </Card>
         </CommentsWrapper>

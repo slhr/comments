@@ -75,6 +75,7 @@ const CommentItem = React.memo(({text, userName, userAvatar, rating, creationDat
         ]);
 
         setIsBranchShow(true);
+        setIsInputFormVisible(false);
     };
 
     return (
@@ -92,7 +93,6 @@ const CommentItem = React.memo(({text, userName, userAvatar, rating, creationDat
 
                 {
                     isInputFormVisible && <CommentInputForm addComment={addComment}
-                                                            setIsInputFormVisible={setIsInputFormVisible}
                                                             isOutlined={true}/>
                 }
 

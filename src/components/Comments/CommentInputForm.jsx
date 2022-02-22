@@ -21,19 +21,14 @@ const schema = yup.object().shape({
 });
 
 
-const CommentInputForm = ({addComment, addRootComment, setIsInputFormVisible, isOutlined}) => {
+const CommentInputForm = ({addComment, isOutlined}) => {
     const {register, handleSubmit, reset, formState: {errors}} = useForm({
         mode: "onSubmit",
         resolver: yupResolver(schema)
     });
 
     const onSubmit = (values) => {
-        if (addRootComment) {
-            addRootComment(values);
-        } else {
-            addComment(values);
-            setIsInputFormVisible(false);
-        }
+        addComment(values);
         reset();
     };
 
